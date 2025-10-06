@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="120" height="60" viewBox="0 0 120 60" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4facfe"/>
+      <stop offset="100%" stop-color="#8e54e9"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Main fuselage -->
+  <ellipse cx="60" cy="30" rx="45" ry="8" fill="url(#grad)"/>
+  
+  <!-- Main wings -->
+  <path d="M30 30 L10 30 L20 10 L40 20 Z" fill="url(#grad)"/>
+  <path d="M30 30 L10 30 L20 50 L40 40 Z" fill="url(#grad)"/>
+  
+  <!-- Vertical stabilizer -->
+  <path d="M15 30 L15 15 L10 20 L15 30 Z" fill="url(#grad)"/>
+  
+  <!-- Horizontal stabilizers -->
+  <path d="M20 28 L8 28 L12 25 L20 28 Z" fill="url(#grad)"/>
+  <path d="M20 32 L8 32 L12 35 L20 32 Z" fill="url(#grad)"/>
+  
+  <!-- Nose -->
+  <ellipse cx="100" cy="30" rx="8" ry="5" fill="url(#grad)"/>
+  
+  <!-- Engines -->
+  <ellipse cx="25" cy="20" rx="4" ry="2" fill="url(#grad)"/>
+  <ellipse cx="25" cy="40" rx="4" ry="2" fill="url(#grad)"/>
+  
+  <!-- Windows -->
+  <circle cx="70" cy="30" r="2" fill="white"/>
+  <circle cx="75" cy="30" r="2" fill="white"/>
+  <circle cx="80" cy="30" r="2" fill="white"/>
+</svg>
