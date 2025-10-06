@@ -1,5 +1,16 @@
 // Smooth scrolling for navigation links
 document.addEventListener('DOMContentLoaded', function() {
+    // Consent Mode v2 defaults
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} // define early
+    window.gtag = gtag;
+    gtag('consent', 'default', {
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'analytics_storage': 'denied'
+    });
+
     // Mobile menu toggle
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
@@ -56,6 +67,49 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initialize airplane animation
     initAirplaneAnimation();
+
+    // Cookie banner inject
+    const banner = document.createElement('div');
+    banner.id = 'cookie-banner';
+    banner.innerHTML = `
+      <div class="cookie-container">
+        <div class="cookie-text">Мы используем файлы cookie. Подробнее в <a href="privacy.html" target="_blank">Политике конфиденциальности</a>.</div>
+        <div class="cookie-actions">
+          <button id="cookie-accept" class="btn btn-primary">Принять все</button>
+          <button id="cookie-reject" class="btn btn-secondary">Только необходимые</button>
+        </div>
+      </div>`;
+    document.body.appendChild(banner);
+
+    const accept = document.getElementById('cookie-accept');
+    const reject = document.getElementById('cookie-reject');
+
+    const hideBanner = () => { banner.style.display = 'none'; };
+    const saveConsent = (v) => { try { localStorage.setItem('cookie_consent_v2', v); } catch(e) {} };
+    const existing = (() => { try { return localStorage.getItem('cookie_consent_v2'); } catch(e) { return null; }})();
+    if (existing) { hideBanner(); }
+
+    accept?.addEventListener('click', () => {
+      gtag('consent', 'update', {
+        'ad_storage': 'granted',
+        'ad_user_data': 'granted',
+        'ad_personalization': 'granted',
+        'analytics_storage': 'granted'
+      });
+      saveConsent('granted');
+      hideBanner();
+    });
+
+    reject?.addEventListener('click', () => {
+      gtag('consent', 'update', {
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'analytics_storage': 'denied'
+      });
+      saveConsent('denied');
+      hideBanner();
+    });
 });
 
 // Russian cities coordinates (better spaced)
