@@ -55,6 +55,45 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    // Floating Telegram button
+    const telegramBtn = document.getElementById('telegramFloatBtn');
+    let isTelegramVisible = false;
+    let lastScrollY = window.scrollY;
+
+    function showTelegramButton() {
+        if (!isTelegramVisible) {
+            telegramBtn.classList.add('show');
+            isTelegramVisible = true;
+        }
+    }
+
+    function hideTelegramButton() {
+        if (isTelegramVisible) {
+            telegramBtn.classList.remove('show');
+            isTelegramVisible = false;
+        }
+    }
+
+    // Show button after scrolling down 300px
+    window.addEventListener('scroll', function() {
+        const currentScrollY = window.scrollY;
+        
+        if (currentScrollY > 300) {
+            showTelegramButton();
+        } else {
+            hideTelegramButton();
+        }
+        
+        lastScrollY = currentScrollY;
+    });
+
+    // Show button after 3 seconds on page load
+    setTimeout(() => {
+        if (window.scrollY > 100) {
+            showTelegramButton();
+        }
+    }, 3000);
+
     // Form submission
     const contactForm = document.querySelector('.contact-form');
     if (contactForm) {
