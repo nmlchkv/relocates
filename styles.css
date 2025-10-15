@@ -1117,15 +1117,16 @@ section {
     background: #0088cc;
     color: white;
     text-decoration: none;
-    padding: 12px 16px;
-    border-radius: 50px;
+    padding: 10px 14px;
+    border-radius: 25px;
     box-shadow: 0 4px 20px rgba(0, 136, 204, 0.3);
     transition: all 0.3s ease;
     font-weight: 500;
-    font-size: 14px;
-    min-width: 120px;
+    font-size: 13px;
+    min-width: 100px;
     justify-content: center;
-    gap: 8px;
+    gap: 6px;
+    height: 40px;
 }
 
 .telegram-link:hover {
@@ -1140,19 +1141,21 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 24px;
-    height: 24px;
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
 }
 
 .telegram-icon svg {
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     fill: currentColor;
 }
 
 .telegram-text {
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 500;
+    white-space: nowrap;
 }
 
 /* Mobile styles for floating button */
@@ -1163,13 +1166,24 @@ section {
     }
     
     .telegram-link {
-        padding: 10px 14px;
-        min-width: 100px;
-        font-size: 13px;
+        padding: 8px 12px;
+        min-width: 90px;
+        font-size: 12px;
+        height: 36px;
     }
     
     .telegram-text {
-        font-size: 13px;
+        font-size: 12px;
+    }
+    
+    .telegram-icon {
+        width: 16px;
+        height: 16px;
+    }
+    
+    .telegram-icon svg {
+        width: 14px;
+        height: 14px;
     }
 }
 
