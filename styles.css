@@ -289,7 +289,7 @@ section {
 }
 
 .service-cta-card {
-    background: #fff;
+    background: #0088cc; /* filled blue */
     padding: 1.5rem;
     border-radius: 15px;
     border: 2px solid #74abce;
@@ -298,17 +298,17 @@ section {
     justify-content: center;
     transition: all 0.3s ease;
     cursor: pointer;
+    text-decoration: none; /* remove underline */
+    color: #fff; /* white text */
 }
 
 .service-cta-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    background: #f8f9fa;
+    box-shadow: 0 10px 25px rgba(0, 136, 204, 0.25);
+    background: #0077b3; /* darker on hover */
 }
 
 .service-cta-card {
-    text-decoration: none;
-    color: #333;
     width: 100%;
     height: 100%;
     display: flex;
@@ -320,6 +320,7 @@ section {
     font-size: 1.1rem;
     font-weight: 600;
     text-align: center;
+    color: #fff; /* ensure white text */
 }
 
 /* Digital Nomad Card Styles */
