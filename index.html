@@ -79,7 +79,7 @@
             <h1 class="hero-title">Релокация в Испанию</h1>
             <p class="hero-subtitle">Полный спектр услуг для комфортного переезда в солнечную Испанию</p>
             <div class="hero-buttons">
-                <a href="https://t.me/relocates_spain" class="btn btn-secondary" target="_blank">Узнать тарифы и подробности</a>
+                <button id="openChecklistBtn" class="btn btn-secondary" type="button">Пройти чек-лист</button>
             </div>
         </div>
         <div class="scroll-indicator">
@@ -196,6 +196,35 @@
 
     <!-- Airplane Canvas -->
     <canvas id="airplaneCanvas"></canvas>
+
+    <!-- Checklist Modal -->
+    <div id="checklistModal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="checklistTitle">
+        <div class="modal-backdrop" data-close-modal></div>
+        <div class="modal-dialog" role="document">
+            <button class="modal-close" type="button" aria-label="Закрыть" data-close-modal>&times;</button>
+            <h3 id="checklistTitle" class="modal-title">🎯 Чек-лист: подхожу ли я под визу Digital Nomad в Испании?</h3>
+            <p class="modal-subtitle">Этот список поможет понять, готовы ли вы к подаче. Пройдитесь по пунктам.</p>
+
+            <div id="checklistStep" class="modal-step">
+                <div class="modal-question" id="modalQuestion"></div>
+                <div class="modal-actions">
+                    <button class="btn btn-primary" id="answerYes" type="button">Да</button>
+                    <button class="btn btn-secondary" id="answerNo" type="button">Нет</button>
+                    <button class="btn btn-secondary" id="answerClarify" type="button">Надо уточнить</button>
+                </div>
+                <div class="modal-progress"><span id="progressText">1 / 11</span></div>
+            </div>
+
+            <div id="checklistResult" class="modal-result" hidden>
+                <h4 id="resultTitle"></h4>
+                <p id="resultText"></p>
+                <p class="modal-redirect" id="redirectText" hidden>Сейчас откроется Telegram…</p>
+                <div class="modal-actions">
+                    <a href="https://t.me/relocates_spain" target="_blank" class="btn btn-primary" id="goTelegram">Перейти в Telegram</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Floating Telegram Button -->
     <div id="telegramFloatBtn" class="telegram-float-btn">

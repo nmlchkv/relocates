@@ -94,6 +94,100 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }, 3000);
 
+    // Checklist modal logic
+    const openChecklistBtn = document.getElementById('openChecklistBtn');
+    const modal = document.getElementById('checklistModal');
+    const closeEls = modal ? modal.querySelectorAll('[data-close-modal]') : [];
+    const questionEl = document.getElementById('modalQuestion');
+    const progressEl = document.getElementById('progressText');
+    const stepWrap = document.getElementById('checklistStep');
+    const resultWrap = document.getElementById('checklistResult');
+    const resultTitle = document.getElementById('resultTitle');
+    const resultText = document.getElementById('resultText');
+    const redirectText = document.getElementById('redirectText');
+    const btnYes = document.getElementById('answerYes');
+    const btnNo = document.getElementById('answerNo');
+    const btnClarify = document.getElementById('answerClarify');
+
+    const questions = [
+        '1️⃣ Работаю официально — по найму, как ИП или самозанятый. Деятельность легальная?',
+        '2️⃣ Есть долгосрочные контракты — от 3 лет или бессрочные, заключены минимум 3 месяца назад?',
+        '3️⃣ Работодатель существует больше года — можете подтвердить выпиской из ЕГРЮЛ?',
+        '4️⃣ Удалёнка разрешена — в договоре прописано, что вы можете работать из Испании?',
+        '5️⃣ Доход от 2763 евро в месяц (плюс 1036 на супруга, 346 на ребёнка) или есть накопления?',
+        '6️⃣ Доход в рублях считаете по курсу ЦБ РФ?',
+        '7️⃣ Можете подтвердить доход выписками из банка за последние 3 месяца?',
+        '8️⃣ Есть опыт или профильное образование — минимум 3 года стажа по специальности?',
+        '9️⃣ Нет судимости — готовы заказать справку и апостиль?',
+        '🔟 Готовы оформить соцстраховку — СФР (найм в РФ) или в Испании (ИП/самозанятый)?',
+        '1️⃣1️⃣ Находитесь легально в Испании или готовы подавать через консульство?'
+    ];
+
+    let idx = 0;
+    let yesCount = 0;
+    let unsureCount = 0;
+
+    function renderStep() {
+        if (!modal) return;
+        questionEl.textContent = questions[idx];
+        progressEl.textContent = `${idx + 1} / ${questions.length}`;
+    }
+
+    function openModal() {
+        if (!modal) return;
+        idx = 0; yesCount = 0; unsureCount = 0;
+        stepWrap.hidden = false;
+        resultWrap.hidden = true;
+        redirectText.hidden = true;
+        modal.classList.add('show');
+        modal.setAttribute('aria-hidden', 'false');
+        renderStep();
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        if (!modal) return;
+        modal.classList.remove('show');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    }
+
+    openChecklistBtn?.addEventListener('click', openModal);
+    closeEls.forEach(el => el.addEventListener('click', closeModal));
+    modal?.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+
+    function finishChecklist() {
+        stepWrap.hidden = true;
+        resultWrap.hidden = false;
+        const passed = yesCount >= Math.ceil(questions.length * 0.7);
+        if (passed) {
+            resultTitle.textContent = 'Чек-лист пройден ✅';
+            resultText.textContent = 'Вы, вероятно, подходите под Digital Nomad Visa. Проконсультируйтесь бесплатно — мы подскажем, как подать документы.';
+        } else {
+            resultTitle.textContent = 'Нужно обсудить детали';
+            resultText.textContent = 'Есть нюансы, которые стоит уточнить. Мы поможем понять, что можно улучшить для подачи.';
+        }
+        redirectText.hidden = false;
+        setTimeout(() => {
+            window.open('https://t.me/relocates_spain', '_blank');
+        }, 2500);
+    }
+
+    function handleAnswer(kind) {
+        if (kind === 'yes') yesCount++;
+        if (kind === 'unsure') unsureCount++;
+        if (idx < questions.length - 1) {
+            idx++;
+            renderStep();
+        } else {
+            finishChecklist();
+        }
+    }
+
+    btnYes?.addEventListener('click', () => handleAnswer('yes'));
+    btnNo?.addEventListener('click', () => handleAnswer('no'));
+    btnClarify?.addEventListener('click', () => handleAnswer('unsure'));
+
     // Form submission
     const contactForm = document.querySelector('.contact-form');
     if (contactForm) {
